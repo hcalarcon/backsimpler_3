@@ -1,7 +1,12 @@
 //archivo para manejar las rutas de usuarios
 
 import { Router } from "express";
-import { createUsers, logIn } from "../controller/users";
+import {
+  auth,
+  createUsers,
+  getMateriasbyDni,
+  logIn,
+} from "../controller/users";
 
 //objeto para manejo de url
 const routerUsers = Router();
@@ -23,4 +28,11 @@ routerUsers.post("/user/login", logIn);
  */
 routerUsers.post("/user/usersp", createUsers);
 
+/**
+ * @swagger
+ * /getMaterias:
+ *  get:
+ *      sumary: devuelve las materias para un usuario determinado
+ */
+routerUsers.get("/user/getMaterias", auth, getMateriasbyDni);
 export default routerUsers;

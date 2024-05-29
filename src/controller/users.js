@@ -1,4 +1,6 @@
 import { connect } from "../databases";
+import jwt from "jsonwebtoken";
+const claveSecreta = process.env.SECRET_KEY;
 
 export const logIn = async (req, res) => {
   try {
@@ -19,8 +21,11 @@ export const logIn = async (req, res) => {
       if (result[0].pass === password) {
         // contraseña igual
         //crear un token
+        const token = getToken({ dni: dni });
         //enviar al front
-        return res.status(200).json({ message: "correcto", success: true });
+        return res
+          .status(200)
+          .json({ message: "correcto", success: true, token: token });
       } else {
         return res
           .status(400)
@@ -32,8 +37,6 @@ export const logIn = async (req, res) => {
         .status(400)
         .json({ message: "user no existe", success: false });
     }
-
-    res.json({});
   } catch (error) {
     res.status(500).json({ message: "fallo en chatch", error: error });
   }
@@ -59,7 +62,6 @@ export const createUsers = async (req, res) => {
 
     const userExist = await validate("dni", dni, "alumno", cnn);
 
-    console.log("userexist", userExist);
     //validar la existencia de el dni
     if (userExist)
       return res.status(400).json({ message: "el usuario ya existe" });
@@ -82,4 +84,49 @@ export const createUsers = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: error, success: false });
   }
+};
+
+//funcion para autenticar el token
+//middleware
+export const auth = (req, res, next) => {
+  //obtener el token desde la peticion
+  const tokenFront = req.headers["auth"];
+
+  //verificar que hay un token
+  if (!tokenFront) return res.status(400).json({ message: "no hay token" }); //si no existe el troken en la peticion
+
+  //si hay token, debemos validarlo
+  jwt.verify(tokenFront, claveSecreta, (error, payload) => {
+    if (error) {
+      //si el token no es validor
+      return res.status(400).json({ message: " el token no es valido" });
+    } else {
+      //el token es valido
+      req.payload = payload;
+      next();
+    }
+  });
+};
+
+//me de la lista de las materias de un alumno
+export const getMateriasbyDni = (req, res) => {
+  //vamos a simular el acceso a la base de datos para obtener la lista de materias que un alumno esta cursando
+  //obtener el dni de la request
+  const dni = req.payload;
+  console.log(dni);
+  //acceder a la base datos
+  const materias = [
+    { id: 1, nombre: "so2" },
+    { id: 2, nombre: "web" },
+    { id: 3, nombre: "arquitectura" },
+  ];
+
+  return res.status(200).json(materias);
+};
+
+//funciones privadas
+//funcion que devuelte el token
+const getToken = (payload) => {
+  const token = jwt.sign(payload, claveSecreta, { expiresIn: "1m" });
+  return token;
 };

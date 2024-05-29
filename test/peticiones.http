@@ -7,7 +7,7 @@ POST {{login}}
 Content-Type: application/json
 
 {
-    "dni" : "5",
+    "dni" : "10",
     "password" : "1234"
 }
 
@@ -16,7 +16,7 @@ POST {{usersp}}
 Content-Type: application/json
 
 {
-    "dni" : "6",
+    "dni" : "10",
     "nombre" : "juan",
     "password" : "1234"
 }
