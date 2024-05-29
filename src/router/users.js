@@ -13,7 +13,7 @@ const routerUsers = Router();
  *  post:
  *      sumary: loguear usuario
  */
-routerUsers.get("/user/login", logIn);
+routerUsers.post("/user/login", logIn);
 
 /**
  * @swagger

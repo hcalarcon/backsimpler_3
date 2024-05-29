@@ -1,8 +1,8 @@
-
 -- Crear la tabla 'alumno'
 CREATE TABLE IF NOT EXISTS alumno (
     dni INT(10) PRIMARY KEY NOT NULL,
-    nombre VARCHAR(20)
+    nombre VARCHAR(20),
+    pass VARCHAR(100)
 );
 
 -- Crear la tabla 'materia'

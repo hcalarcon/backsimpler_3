@@ -1,0 +1,24 @@
+@usersp = http://localhost:3000/user/usersp
+@login = http://localhost:3000/user/login
+
+
+
+POST {{login}}
+Content-Type: application/json
+
+{
+    "dni" : "5",
+    "password" : "1234"
+}
+
+###
+POST {{usersp}}
+Content-Type: application/json
+
+{
+    "dni" : "6",
+    "nombre" : "juan",
+    "password" : "1234"
+}
+
+#body
