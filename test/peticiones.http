@@ -1,6 +1,6 @@
 @usersp = http://localhost:3000/user/usersp
 @login = http://localhost:3000/user/login
-
+@getmaterias = http://localhost:3000/user/getMaterias
 
 
 POST {{login}}
@@ -21,4 +21,6 @@ Content-Type: application/json
     "password" : "1234"
 }
 
-#body
+###
+GET {{getmaterias}}
+auth : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkbmkiOiIxMCIsImlhdCI6MTcxNjk5MTIyNCwiZXhwIjoxNzE2OTkxMjg0fQ.3lgnSPdLuN1jw6PWF5_noh9pDyxz8gDZVq9jRHTgXjQ
