@@ -23,4 +23,4 @@ Content-Type: application/json
 
 ###
 GET {{getmaterias}}
-auth : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkbmkiOiIxMCIsImlhdCI6MTcxNjk5MTIyNCwiZXhwIjoxNzE2OTkxMjg0fQ.3lgnSPdLuN1jw6PWF5_noh9pDyxz8gDZVq9jRHTgXjQ
+auth : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkbmkiOiIxMCIsImlhdCI6MTcxODgwNjU1MCwiZXhwIjoxNzE5MDIyNTUwfQ.NqoP_S2ptLeC8paMs2F8JLoNFzbNrKZ5xYpdAGk_VwY

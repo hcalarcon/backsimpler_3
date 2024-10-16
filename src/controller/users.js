@@ -7,6 +7,10 @@ export const logIn = async (req, res) => {
     //obtener los datos de la request - PASO 1
     const { dni, password } = req.body;
 
+    const token = getToken({ dni: dni });
+
+    return res.status(200).json({ success: true, token: token });
+
     //obtener el objeto conexión - PASO 2
     const cnn = await connect();
 
@@ -38,6 +42,7 @@ export const logIn = async (req, res) => {
         .json({ message: "user no existe", success: false });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "fallo en chatch", error: error });
   }
 };
@@ -119,6 +124,9 @@ export const getMateriasbyDni = (req, res) => {
     { id: 1, nombre: "so2" },
     { id: 2, nombre: "web" },
     { id: 3, nombre: "arquitectura" },
+    { id: 4, nombre: "so2" },
+    { id: 5, nombre: "web" },
+    { id: 6, nombre: "arquitectura" },
   ];
 
   return res.status(200).json(materias);
@@ -127,6 +135,6 @@ export const getMateriasbyDni = (req, res) => {
 //funciones privadas
 //funcion que devuelte el token
 const getToken = (payload) => {
-  const token = jwt.sign(payload, claveSecreta, { expiresIn: "1m" });
+  const token = jwt.sign(payload, claveSecreta, { expiresIn: "3600m" });
   return token;
 };
