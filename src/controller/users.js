@@ -7,9 +7,10 @@ export const logIn = async (req, res) => {
     //obtener los datos de la request - PASO 1
     const { dni, password } = req.body;
 
+    //construi el token
     const token = getToken({ dni: dni });
 
-    return res.status(200).json({ success: true, token: token });
+    //return res.status(200).json({ success: true, token: token });
 
     //obtener el objeto conexión - PASO 2
     const cnn = await connect();

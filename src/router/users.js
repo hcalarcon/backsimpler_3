@@ -20,6 +20,11 @@ const routerUsers = Router();
  */
 routerUsers.post("/user/login", logIn);
 
+routerUsers.get("/", (req, res) => {
+  // Ignora los parámetros y responde normalmente
+  res.send("Hello World");
+});
+
 /**
  * @swagger
  * /usersp:
